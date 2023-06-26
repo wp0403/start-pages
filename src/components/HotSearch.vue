@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2023-06-25 19:00:58
  * @LastEditors: WangPeng
- * @LastEditTime: 2023-06-26 15:19:46
+ * @LastEditTime: 2023-06-26 17:48:06
 -->
 <template>
   <div class="content">
@@ -26,18 +26,21 @@
       </a>
     </div>
     <div class="bookmark" :class="{ hot_search_active: current === 2 }">
-      <a
-        class="bookmark_item"
-        v-for="item in bookmark"
-        :key="item.id"
-        :href="item.url"
-        target="_blank"
-      >
-        <img class="bookmark_item_icon" :src="item.icon" alt="" />
+      <div class="bookmark_item" v-for="item in bookmark" :key="item.id">
+        <a class="bookmark_item_url" :href="item.url" target="_blank">
+          <img
+            class="bookmark_item_icon"
+            :src="item.icon || `https://api.vvhan.com/api/ico?url=${item.url}`"
+            alt=""
+          />
+        </a>
         <div class="bookmark_item_title">{{ item.title }}</div>
-      </a>
-      <a class="bookmark_item">
-        <SysIcon class="bookmark_item_add" type="icon-RectangleCopy17" />
+      </div>
+      <a class="bookmark_item bookmark_item_last">
+        <SysIcon
+          class="bookmark_item_url bookmark_item_add"
+          type="icon-RectangleCopy17"
+        />
       </a>
     </div>
     <div class="btn_box">
@@ -78,11 +81,11 @@ const changeCurrent = (v) => {
 
 <style scoped>
 .content {
+  flex: 1;
   display: flex;
   position: relative;
   width: 60%;
   margin: 0 auto;
-  height: 350px;
 }
 
 .bookmark {
@@ -91,7 +94,7 @@ const changeCurrent = (v) => {
   z-index: -1;
   opacity: 0;
   width: 100%;
-  max-height: 350px;
+  max-height: 100%;
   overflow-y: auto;
   padding: 24px 72px;
   border-radius: 12px;
@@ -107,17 +110,20 @@ const changeCurrent = (v) => {
   align-items: center;
   justify-content: center;
   padding: 24px;
-  margin: 12px;
-  background-color: var(--w-alpha-30);
+  /* background-color: var(--w-alpha-30); */
   border-radius: 16px;
-  transition: all 0.25s;
 }
 
-.bookmark_item:hover {
+.bookmark_item_url {
+  padding: 24px;
+  background-color: var(--w-alpha-30);
+  border-radius: 12px;
+  transition: all 0.25s;
+}
+.bookmark_item_url:hover {
   background-color: var(--b-alpha-60);
   box-shadow: 0 0 10px 1px var(--b-alpha-60);
 }
-
 .bookmark_item_icon {
   width: 36px;
   height: 36px;
@@ -131,16 +137,17 @@ const changeCurrent = (v) => {
   white-space: nowrap;
 }
 
-.bookmark_item:hover .bookmark_item_title{
-  color: var(--w-alpha-80);
+.bookmark_item_last {
+  padding-bottom: 52px;
 }
+
 .hot_search {
   position: absolute;
   left: 100%;
   z-index: -1;
   opacity: 0;
   width: 100%;
-  max-height: 350px;
+  max-height: 100%;
   background-color: var(--w-alpha-30);
   overflow-y: auto;
   border-radius: 12px;
@@ -227,7 +234,7 @@ const changeCurrent = (v) => {
   background-color: var(--w-alpha-60);
 }
 
-.bookmark_item_add{
+.bookmark_item_add {
   font-size: 36px;
   color: var(--color-blue);
 }

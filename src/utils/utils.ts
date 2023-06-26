@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2023-06-19 13:52:09
  * @LastEditors: WangPeng
- * @LastEditTime: 2023-06-20 15:48:27
+ * @LastEditTime: 2023-06-26 19:25:01
  */
 export const getWeather = async () => {
   const key = '20561291894a3365e0a71cad618749e0';
@@ -36,3 +36,7 @@ export const handleThemeChange = (event) => {
     return 1;
   }
 }
+
+/**
+ * 获取本地储存的配置
+ */

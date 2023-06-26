@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2023-06-26 11:55:35
  * @LastEditors: WangPeng
- * @LastEditTime: 2023-06-26 13:52:53
+ * @LastEditTime: 2023-06-26 16:55:54
 -->
 <template>
   <div class="footer">
@@ -40,7 +40,7 @@ getIan().then((res) => {
 
 <style scoped>
 .footer {
-  flex: 1;
+  min-height: 140px;
   display: flex;
   flex-direction: column;
   align-items: center;

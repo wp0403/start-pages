@@ -54,24 +54,22 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import SysIcon from "@/components/SysIcon.vue";
-import { searchList } from "@/utils/dict";
+import configStore from "@/store/config";
 
-const list = ref<any[]>(searchList);
+const {config,changeConfig} = configStore;
+
+const list = ref<any[]>(config.searchList);
 // 当前搜索的内容
 const searchValue = ref<string>("");
 // 当前搜索引擎列表框是否展示
 const isEnginesList = ref<boolean>(false);
 // 当前选中的搜索引擎
-const enginesActive = ref<any>({
-  id: 1,
-  title: "百度",
-  icon: "",
-  url: "https://www.baidu.com/s?ie=utf-8&word=",
-});
+const enginesActive = ref<any>(config.searchList.find(v => v.id === config.enginesId));
 
 // 切换搜索引擎
 const changeEngines = (v) => {
   enginesActive.value = v;
+  changeConfig('enginesId', v.id);
 };
 
 const clickEnginesList = (v) => {
@@ -90,6 +88,7 @@ const clickEnginesListItem = (v) => {
     }
     return item;
   });
+  changeConfig('searchList', list.value);
 };
 
 // 跳转搜索
@@ -169,6 +168,7 @@ const goSearch = () => {
   background-color: var(--color-blue-bg-hover);
   color: var(--b-alpha);
   cursor: pointer;
+  white-space: nowrap;
   transition: all 0.2s;
 }
 
@@ -180,6 +180,7 @@ const goSearch = () => {
   background-color: var(--color-blue-border-hover);
   color: var(--b-alpha);
   cursor: pointer;
+  white-space: nowrap;
   transition: all 0.2s;
 }
 
@@ -196,6 +197,7 @@ const goSearch = () => {
   cursor: pointer;
   transition: all 0.2s;
   font-size: 16px;
+  flex-shrink: 0;
 }
 
 .engines_item_btn:hover {
@@ -209,7 +211,7 @@ const goSearch = () => {
   top: 62px;
   width: 100%;
   max-height: 300px;
-  background-color: var(--w-alpha-60);
+  background-color: var(--w-alpha-90);
   backdrop-filter: blur(5px);
   border-radius: 8px;
   padding: 8px;
