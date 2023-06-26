@@ -114,7 +114,6 @@ const goSearch = () => {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  overflow-x: hidden;
 }
 
 .search_input {
