@@ -1,0 +1,22 @@
+/* modal 开始 */
+.ant-modal .ant-modal-content{
+    border-radius: 8px;
+    background-color: var(--w-alpha);
+}
+
+.ant-modal-root .ant-modal-mask{
+    background-color: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(5px);
+}
+
+.ant-modal .ant-modal-content .ant-modal-close-icon{
+    color: var(--b-alpha-90);
+}
+/* modal 结束 */
+
+/* message 开始 */
+.ant-message .ant-message-notice-content{
+    border-radius: 20px;
+    font-size: 12px;
+    padding: 6px 12px;
+}
