@@ -9,7 +9,6 @@ declare module 'vue' {
   export interface GlobalComponents {
     AButton: typeof import('ant-design-vue/es')['Button']
     ADrawer: typeof import('ant-design-vue/es')['Drawer']
-    AModal: typeof import('ant-design-vue/es')['Modal']
     APopover: typeof import('ant-design-vue/es')['Popover']
     ASwitch: typeof import('ant-design-vue/es')['Switch']
     BgChangeModal: typeof import('./src/components/BgChangeModal.vue')['default']

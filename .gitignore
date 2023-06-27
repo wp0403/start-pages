@@ -11,6 +11,7 @@ node_modules
 dist
 dist-ssr
 *.local
+shimmer-start-pages
 
 # Editor directories and files
 .vscode/*
