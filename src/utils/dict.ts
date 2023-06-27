@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2023-06-25 17:48:09
  * @LastEditors: WangPeng
- * @LastEditTime: 2023-06-27 18:00:20
+ * @LastEditTime: 2023-06-27 20:29:02
  */
 export const searchList = [
     {
@@ -44,6 +44,65 @@ export const searchList = [
     }
 ];
 
+// 热搜渠道列表
+export const hotSearchList = [
+    {
+        id: 1,
+        title: '百度',
+        url: 'https://api.vvhan.com/api/hotlist?type=baiduRD',
+    },
+    {
+        id: 2,
+        title: '微博',
+        url: 'https://api.vvhan.com/api/hotlist?type=wbHot',
+    },
+    {
+        id: 3,
+        title: '抖音',
+        url: 'https://api.vvhan.com/api/hotlist?type=douyinHot',
+    },
+    {
+        id: 5,
+        title: '36氪',
+        url: 'https://api.vvhan.com/api/hotlist?type=36Ke',
+    },
+    {
+        id: 6,
+        title: '虎扑',
+        url: 'https://api.vvhan.com/api/hotlist?type=huPu',
+    },
+    {
+        id: 7,
+        title: '知乎',
+        url: 'https://api.vvhan.com/api/hotlist?type=zhihuHot',
+    },
+    {
+        id: 8,
+        title: 'bilibili',
+        url: 'https://api.vvhan.com/api/hotlist?type=bili',
+    },
+    {
+        id: 9,
+        title: '少数派',
+        url: 'https://api.vvhan.com/api/hotlist?type=ssPai',
+    },
+    {
+        id: 10,
+        title: '豆瓣小组',
+        url: 'https://api.vvhan.com/api/hotlist?type=douban',
+    },
+    {
+        id: 11,
+        title: 'IT资讯最新',
+        url: 'https://api.vvhan.com/api/hotlist?type=itNews',
+    },
+    {
+        id: 12,
+        title: 'IT资讯热榜',
+        url: 'https://api.vvhan.com/api/hotlist?type=itInfo',
+    },
+]
+
 export const bookmark = [
     {
         id: 1,
@@ -69,17 +128,16 @@ export const bookmark = [
         id: 5,
         title: 'bilibili',
         url: 'https://www.bilibili.com/',
-        icon: 'https://api.vvhan.com/api/ico?url=bilibili.com'
-    },
-    {
-        id: 6,
-        title: 'Chatbot UI',
-        url: 'https://ai.qiaomu.pro/zh',
     },
     {
         id: 7,
         title: 'shimmer',
         url: 'https://wp-boke.work/',
+    },
+    {
+        id: 8,
+        title: '韩小韩API接口站',
+        url: 'https://api.vvhan.com/',
     },
 ];
 
@@ -108,7 +166,9 @@ export const config = {
     enginesId: 1, // 当前选中的搜索引擎id
     contentType: 1,  // 当前的内容展示页  1为热搜，2为书签
     theme: 'auto',  // 当前的主题 light为亮色，dark为暗色，auto为跟随系统
+    currentHotSearch: 1,  // 当前热搜
     searchList,
     bookmark,
     bgList,
+    hotSearchList,
 };

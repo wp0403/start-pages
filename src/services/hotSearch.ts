@@ -4,11 +4,11 @@
  * @Author: WangPeng
  * @Date: 2023-06-26 10:40:17
  * @LastEditors: WangPeng
- * @LastEditTime: 2023-06-26 17:30:58
+ * @LastEditTime: 2023-06-27 20:24:54
  */
-// 获取微博热搜
-export const getHotWeiBoSearchList = async () => {
-    const res = await fetch(`https://api.vvhan.com/api/wbhot`);
+// 获取热搜
+export const getHotSearchList = async (v?) => {
+    const res = await fetch(v || `https://api.vvhan.com/api/wbhot`);
     const data = await res.json();
     return data.data;
 }

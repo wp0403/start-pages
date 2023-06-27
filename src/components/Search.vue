@@ -109,7 +109,7 @@ const goSearch = () => {
 <style scoped>
 .search_box {
   width: 100%;
-  padding: 100px 24px 12px;
+  padding: 80px 24px 12px;
   display: flex;
   flex-direction: column;
   align-items: center;

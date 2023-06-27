@@ -10,6 +10,8 @@ declare module 'vue' {
     AButton: typeof import('ant-design-vue/es')['Button']
     ADrawer: typeof import('ant-design-vue/es')['Drawer']
     APopover: typeof import('ant-design-vue/es')['Popover']
+    ASelect: typeof import('ant-design-vue/es')['Select']
+    ASelectOption: typeof import('ant-design-vue/es')['SelectOption']
     ASwitch: typeof import('ant-design-vue/es')['Switch']
     BgChangeModal: typeof import('./src/components/BgChangeModal.vue')['default']
     Footer: typeof import('./src/components/Footer.vue')['default']

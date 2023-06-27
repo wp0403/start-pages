@@ -36,4 +36,46 @@
     background-color: var(--w-alpha-80);
     backdrop-filter: blur(5px);
 }
+
+.ant-drawer .ant-drawer-close,.ant-drawer .ant-drawer-title{
+    color: var(--b-alpha-90);
+}
 /* drawer 结束 */
+
+/* select 开始 */
+.ant-select{
+    color: var(--b-alpha-90) !important;
+    font-size: 12px !important;
+}
+
+.ant-select .ant-select-selector{
+    border-radius: 8px !important;
+    background-color: transparent !important;
+    border-color: var(--b-alpha-30) !important;
+    outline-color: var(--w-alpha-50) !important;
+    box-shadow: none !important;
+}
+
+.ant-select .ant-select-arrow{
+    color: var(--b-alpha-90) !important;
+}
+
+.ant-select-dropdown{
+    background-color: var(--w-alpha) !important;
+}
+
+.ant-select-dropdown .ant-select-item{
+    color: var(--b-alpha-90) !important;
+    font-size: 13px !important;
+}
+
+.ant-select-dropdown .ant-select-item-option-selected{
+    background-color: var(--b-alpha-30) !important;
+    color: var(--b-alpha) !important;
+}
+
+.ant-select-dropdown .ant-select-item-option-active{
+    background-color: var(--b-alpha-20) !important;
+    color: var(--b-alpha-90) !important;
+}
+/* select 结束 */

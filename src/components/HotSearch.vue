@@ -4,11 +4,14 @@
  * @Author: WangPeng
  * @Date: 2023-06-25 19:00:58
  * @LastEditors: WangPeng
- * @LastEditTime: 2023-06-27 18:07:03
+ * @LastEditTime: 2023-06-27 20:04:10
 -->
 <template>
   <div class="content">
-    <div class="hot_search" :class="{ hot_search_active: config.contentType === 1 }">
+    <div
+      class="hot_search"
+      :class="{ hot_search_active: config.contentType === 1 }"
+    >
       <a
         class="hot_item"
         v-for="item in hotList.slice(0, 20)"
@@ -25,7 +28,10 @@
         </div>
       </a>
     </div>
-    <div class="bookmark" :class="{ hot_search_active: config.contentType === 2 }">
+    <div
+      class="bookmark"
+      :class="{ hot_search_active: config.contentType === 2 }"
+    >
       <div class="bookmark_item" v-for="item in config.bookmark" :key="item.id">
         <a class="bookmark_item_url" :href="item.url" target="_blank">
           <img
@@ -59,9 +65,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import SysIcon from "@/components/SysIcon.vue";
-import { getHotWeiBoSearchList } from "@/services/hotSearch";
+import { getHotSearchList } from "@/services/hotSearch";
 import configStore from "@/store/config";
 
 const { config, changeConfig } = configStore;
@@ -70,9 +76,19 @@ const hotList = ref<any[]>([]);
 const loading = ref<boolean>(false);
 
 loading.value = true;
-getHotWeiBoSearchList().then((res) => {
-  loading.value = false;
-  hotList.value = res?.filter((v) => v.hot)?.sort((a, b) => b.hot - a.hot);
+
+const getHotSearch = async () => {
+  const current = config.hotSearchList.find(
+    (v) => v.id === config.currentHotSearch
+  );
+  await getHotSearchList(current.url).then((res) => {
+    loading.value = false;
+    hotList.value = res;
+  });
+}
+getHotSearch();
+watch(config, async () => {
+  await getHotSearch();
 });
 
 const changeCurrent = (v) => {
@@ -245,6 +261,7 @@ const changeCurrent = (v) => {
 
   .hot_item {
     width: 100%;
+    padding: 4px 8px;
   }
 }
 

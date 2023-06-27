@@ -41,6 +41,18 @@
           @change="changeConfig('isSaveHistory', configObj.isSaveHistory)"
         />
       </div>
+      <div class="config_item">
+        <div class="config_item_title">默认热搜选择</div>
+        <a-select
+          ref="select"
+          v-model:value="config.currentHotSearch"
+          style="min-width: 80px"
+          size="small"
+          @change="handleChange"
+        >
+          <a-select-option :value="item.id" v-for="item in config.hotSearchList" :key="item.id">{{ item.title }}</a-select-option>
+        </a-select>
+      </div>
     </div>
     <div class="config_title">导航</div>
     <div class="config_box">
@@ -102,6 +114,10 @@ const clickSetUp = (v) => {
 
 const changeBg = (v) => {
   changeConfig("bg", v);
+};
+
+const handleChange = (v) => {
+  changeConfig("currentHotSearch", v);
 };
 </script>
 
