@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2023-06-25 17:48:09
  * @LastEditors: WangPeng
- * @LastEditTime: 2023-06-26 19:41:30
+ * @LastEditTime: 2023-06-27 18:00:20
  */
 export const searchList = [
     {
@@ -106,7 +106,7 @@ export const config = {
     isSaveHistory: false,  // 是否保存历史记录
     bg: 'linear-gradient(to top, #9795f0 0%, #fbc8d4 100%)',  // 当前背景
     enginesId: 1, // 当前选中的搜索引擎id
-    contentType: true,  // 当前的内容展示页  true为热搜，false为书签
+    contentType: 1,  // 当前的内容展示页  1为热搜，2为书签
     theme: 'auto',  // 当前的主题 light为亮色，dark为暗色，auto为跟随系统
     searchList,
     bookmark,

@@ -251,6 +251,12 @@ const goSearch = () => {
   cursor: no-drop;
 }
 
+@media screen and (max-width: 1000px) {
+  .search_box{
+    padding: 60px 24px 12px;
+  }
+}
+
 @media screen and (max-width: 800px) {
   .search_input,
   .search_engines {
@@ -259,6 +265,16 @@ const goSearch = () => {
 
   .btn {
     width: 70px;
+  }
+
+  .search_box{
+    padding: 60px 24px 12px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .search_box{
+    padding: 24px 24px 12px;
   }
 }
 </style>

@@ -4,11 +4,11 @@
  * @Author: WangPeng
  * @Date: 2023-06-25 19:00:58
  * @LastEditors: WangPeng
- * @LastEditTime: 2023-06-26 17:48:06
+ * @LastEditTime: 2023-06-27 18:07:03
 -->
 <template>
   <div class="content">
-    <div class="hot_search" :class="{ hot_search_active: current === 1 }">
+    <div class="hot_search" :class="{ hot_search_active: config.contentType === 1 }">
       <a
         class="hot_item"
         v-for="item in hotList.slice(0, 20)"
@@ -25,8 +25,8 @@
         </div>
       </a>
     </div>
-    <div class="bookmark" :class="{ hot_search_active: current === 2 }">
-      <div class="bookmark_item" v-for="item in bookmark" :key="item.id">
+    <div class="bookmark" :class="{ hot_search_active: config.contentType === 2 }">
+      <div class="bookmark_item" v-for="item in config.bookmark" :key="item.id">
         <a class="bookmark_item_url" :href="item.url" target="_blank">
           <img
             class="bookmark_item_icon"
@@ -46,12 +46,12 @@
     <div class="btn_box">
       <div
         class="btn_item"
-        :class="{ btn_item_active: current === 1 }"
+        :class="{ btn_item_active: config.contentType === 1 }"
         @click="changeCurrent(1)"
       />
       <div
         class="btn_item"
-        :class="{ btn_item_active: current === 2 }"
+        :class="{ btn_item_active: config.contentType === 2 }"
         @click="changeCurrent(2)"
       />
     </div>
@@ -62,11 +62,12 @@
 import { ref } from "vue";
 import SysIcon from "@/components/SysIcon.vue";
 import { getHotWeiBoSearchList } from "@/services/hotSearch";
-import { bookmark } from "@/utils/dict";
+import configStore from "@/store/config";
+
+const { config, changeConfig } = configStore;
 
 const hotList = ref<any[]>([]);
 const loading = ref<boolean>(false);
-const current = ref<number>(1);
 
 loading.value = true;
 getHotWeiBoSearchList().then((res) => {
@@ -75,7 +76,7 @@ getHotWeiBoSearchList().then((res) => {
 });
 
 const changeCurrent = (v) => {
-  current.value = v;
+  changeConfig("contentType", v);
 };
 </script>
 
@@ -109,8 +110,7 @@ const changeCurrent = (v) => {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 24px;
-  /* background-color: var(--w-alpha-30); */
+  padding: 12px;
   border-radius: 16px;
 }
 
@@ -138,7 +138,7 @@ const changeCurrent = (v) => {
 }
 
 .bookmark_item_last {
-  padding-bottom: 52px;
+  padding-bottom: 42px;
 }
 
 .hot_search {
@@ -251,20 +251,21 @@ const changeCurrent = (v) => {
 @media screen and (max-width: 1200px) {
   .bookmark {
     grid-template-columns: repeat(4, calc(25%));
+    padding: 24px 36px;
   }
 }
 
 @media screen and (max-width: 1000px) {
   .bookmark {
-    grid-template-columns: repeat(3, calc(33.3%));
-    padding: 24px 0;
+    grid-template-columns: repeat(4, calc(25%));
+    padding: 24px 12px;
   }
 }
 
 @media screen and (max-width: 600px) {
   .bookmark {
-    grid-template-columns: repeat(2, calc(50%));
-    padding: 24px;
+    grid-template-columns: repeat(3, calc(33.3%));
+    padding: 24px 0;
   }
 }
 </style>
