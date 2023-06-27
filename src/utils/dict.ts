@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2023-06-25 17:48:09
  * @LastEditors: WangPeng
- * @LastEditTime: 2023-06-27 20:29:02
+ * @LastEditTime: 2023-06-27 20:34:33
  */
 export const searchList = [
     {
@@ -160,6 +160,7 @@ export const bgList = [
 ]
 
 export const config = {
+    version: '1.0.0',
     isClearSearch: false,  // 是否清空搜索
     isSaveHistory: false,  // 是否保存历史记录
     bg: 'linear-gradient(to top, #9795f0 0%, #fbc8d4 100%)',  // 当前背景

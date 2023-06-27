@@ -10,6 +10,9 @@ import { reactive } from 'vue'
 import { config } from '@/utils/dict'
 
 const newConfig = localStorage.getItem('config') ? JSON.parse(localStorage.getItem('config') as any) : false;
+if(newConfig && config.version !== newConfig.version){
+    localStorage.clear();
+}
 
 const configStore = reactive({
     config: newConfig || config,
