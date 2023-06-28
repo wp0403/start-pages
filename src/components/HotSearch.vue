@@ -4,13 +4,14 @@
  * @Author: WangPeng
  * @Date: 2023-06-25 19:00:58
  * @LastEditors: WangPeng
- * @LastEditTime: 2023-06-27 20:04:10
+ * @LastEditTime: 2023-06-28 20:48:11
 -->
 <template>
   <div class="content">
     <div
       class="hot_search"
       :class="{ hot_search_active: config.contentType === 1 }"
+      v-if="config.isHotSearch"
     >
       <a
         class="hot_item"
@@ -28,36 +29,19 @@
         </div>
       </a>
     </div>
-    <div
-      class="bookmark"
-      :class="{ hot_search_active: config.contentType === 2 }"
-    >
-      <div class="bookmark_item" v-for="item in config.bookmark" :key="item.id">
-        <a class="bookmark_item_url" :href="item.url" target="_blank">
-          <img
-            class="bookmark_item_icon"
-            :src="item.icon || `https://api.vvhan.com/api/ico?url=${item.url}`"
-            alt=""
-          />
-        </a>
-        <div class="bookmark_item_title">{{ item.title }}</div>
-      </div>
-      <a class="bookmark_item bookmark_item_last">
-        <SysIcon
-          class="bookmark_item_url bookmark_item_add"
-          type="icon-RectangleCopy17"
-        />
-      </a>
-    </div>
+    <Bookmark :class="{ hot_search_active: config.contentType === 2 || !config.isHotSearch }" />
     <div class="btn_box">
       <div
         class="btn_item"
         :class="{ btn_item_active: config.contentType === 1 }"
+        v-if="config.isHotSearch"
         @click="changeCurrent(1)"
       />
       <div
         class="btn_item"
-        :class="{ btn_item_active: config.contentType === 2 }"
+        :class="{
+          btn_item_active: config.contentType === 2 || !config.isHotSearch,
+        }"
         @click="changeCurrent(2)"
       />
     </div>
@@ -67,6 +51,7 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
 import SysIcon from "@/components/SysIcon.vue";
+import Bookmark from "@/components/Bookmark.vue";
 import { getHotSearchList } from "@/services/hotSearch";
 import configStore from "@/store/config";
 
@@ -85,7 +70,7 @@ const getHotSearch = async () => {
     loading.value = false;
     hotList.value = res;
   });
-}
+};
 getHotSearch();
 watch(config, async () => {
   await getHotSearch();
@@ -105,62 +90,12 @@ const changeCurrent = (v) => {
   margin: 0 auto;
 }
 
-.bookmark {
-  position: absolute;
-  left: 100%;
-  z-index: -1;
-  opacity: 0;
-  width: 100%;
-  max-height: 100%;
-  overflow-y: auto;
-  padding: 24px 72px;
-  border-radius: 12px;
-  transition: all 0.4s;
-  display: grid;
-  grid-template-columns: repeat(5, calc(20%));
-  grid-template-rows: repeat(1, auto);
-}
-
-.bookmark_item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 12px;
-  border-radius: 16px;
-}
-
-.bookmark_item_url {
-  padding: 24px;
-  background-color: var(--w-alpha-30);
-  border-radius: 12px;
-  transition: all 0.25s;
-}
-.bookmark_item_url:hover {
-  background-color: var(--b-alpha-60);
-  box-shadow: 0 0 10px 1px var(--b-alpha-60);
-}
-.bookmark_item_icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
-}
-
-.bookmark_item_title {
-  padding-top: 8px;
-  color: var(--b-alpha-60);
-  font-weight: 500;
-  white-space: nowrap;
-}
-
-.bookmark_item_last {
-  padding-bottom: 42px;
-}
-
 .hot_search {
   position: absolute;
   left: 100%;
   z-index: -1;
+  top: 50%;
+  transform: translateY(-50%);
   opacity: 0;
   width: 100%;
   max-height: 100%;
@@ -250,10 +185,6 @@ const changeCurrent = (v) => {
   background-color: var(--w-alpha-60);
 }
 
-.bookmark_item_add {
-  font-size: 36px;
-  color: var(--color-blue);
-}
 @media screen and (max-width: 800px) {
   .content {
     width: 90%;
@@ -262,27 +193,6 @@ const changeCurrent = (v) => {
   .hot_item {
     width: 100%;
     padding: 4px 8px;
-  }
-}
-
-@media screen and (max-width: 1200px) {
-  .bookmark {
-    grid-template-columns: repeat(4, calc(25%));
-    padding: 24px 36px;
-  }
-}
-
-@media screen and (max-width: 1000px) {
-  .bookmark {
-    grid-template-columns: repeat(4, calc(25%));
-    padding: 24px 12px;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .bookmark {
-    grid-template-columns: repeat(3, calc(33.3%));
-    padding: 24px 0;
   }
 }
 </style>

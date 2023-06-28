@@ -8,12 +8,14 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     AButton: typeof import('ant-design-vue/es')['Button']
+    ACarousel: typeof import('ant-design-vue/es')['Carousel']
     ADrawer: typeof import('ant-design-vue/es')['Drawer']
     APopover: typeof import('ant-design-vue/es')['Popover']
     ASelect: typeof import('ant-design-vue/es')['Select']
     ASelectOption: typeof import('ant-design-vue/es')['SelectOption']
     ASwitch: typeof import('ant-design-vue/es')['Switch']
     BgChangeModal: typeof import('./src/components/BgChangeModal.vue')['default']
+    Bookmark: typeof import('./src/components/Bookmark.vue')['default']
     Footer: typeof import('./src/components/Footer.vue')['default']
     Head: typeof import('./src/components/Head.vue')['default']
     HotSearch: typeof import('./src/components/HotSearch.vue')['default']

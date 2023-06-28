@@ -19,6 +19,7 @@
   <a-drawer
     class="config"
     v-model:visible="visible"
+    :width="drawerWidth"
     title="常规设置"
     placement="right"
     @after-visible-change="clickSetUp"
@@ -42,6 +43,14 @@
         />
       </div>
       <div class="config_item">
+        <div class="config_item_title">是否展示热搜</div>
+        <a-switch
+          size="small"
+          v-model:checked="configObj.isHotSearch"
+          @change="changeConfig('isHotSearch', configObj.isHotSearch)"
+        />
+      </div>
+      <div class="config_item" v-if="configObj.isHotSearch">
         <div class="config_item_title">默认热搜选择</div>
         <a-select
           ref="select"
@@ -50,7 +59,12 @@
           size="small"
           @change="handleChange"
         >
-          <a-select-option :value="item.id" v-for="item in config.hotSearchList" :key="item.id">{{ item.title }}</a-select-option>
+          <a-select-option
+            :value="item.id"
+            v-for="item in config.hotSearchList"
+            :key="item.id"
+            >{{ item.title }}</a-select-option
+          >
         </a-select>
       </div>
     </div>
@@ -95,7 +109,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { onBeforeUnmount, onMounted, ref } from "vue";
 import useTheme from "@/utils/hooks/theme";
 import logo_black from "@/assets/images/logo_black.png";
 import logo_white from "@/assets/images/logo_white.png";
@@ -107,6 +121,7 @@ const { config, changeConfig, resetConfig } = configStore;
 const { theme, themeSwitch } = useTheme();
 const visible = ref<boolean>(false);
 const configObj = ref<any>(config);
+const drawerWidth = ref<number | string>(378);
 
 const clickSetUp = (v) => {
   visible.value = v;
@@ -119,6 +134,26 @@ const changeBg = (v) => {
 const handleChange = (v) => {
   changeConfig("currentHotSearch", v);
 };
+
+// 处理窗口大小变化
+const handleResize = () => {
+  if (window.innerWidth < 600) {
+    drawerWidth.value = "100%";
+  } else {
+    drawerWidth.value = 378;
+  }
+};
+
+// 初始化时添加事件监听器
+onMounted(() => {
+  handleResize(); // 设置初始宽度
+  window.addEventListener("resize", handleResize);
+});
+
+// 组件销毁前移除事件监听器
+onBeforeUnmount(() => {
+  window.removeEventListener("resize", handleResize);
+});
 </script>
 
 <style scoped>

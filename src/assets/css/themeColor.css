@@ -56,6 +56,7 @@
   --color-blue-bg-hover: #bae0ff;
   --color-blue-border: #91caff;
   --color-blue-border-hover: #69b1ff;
+  --bg-w-220: rgb(220,220,220);
 }
 
 .dark {
@@ -109,6 +110,7 @@
   --color-blue-bg-hover: #112545;
   --color-blue-border: #15325b;
   --color-blue-border-hover: #15417e;
+  --bg-w-220: rgb(55,55,55);
 }
 
 @media (prefers-color-scheme: dark) {

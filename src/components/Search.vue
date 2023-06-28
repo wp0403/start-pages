@@ -93,6 +93,9 @@ const clickEnginesListItem = (v) => {
 
 // 跳转搜索
 const goSearch = () => {
+  if(config.isClearSearch){
+    searchValue.value = '';
+  }
   const flag = list.value
     .filter((v) => v.regular)
     .find((v) => v.id === enginesActive.value.id);
@@ -268,13 +271,17 @@ const goSearch = () => {
   }
 
   .search_box{
-    padding: 60px 24px 12px;
+    padding: 60px 24px 0;
   }
 }
 
 @media screen and (max-width: 600px) {
   .search_box{
-    padding: 24px 24px 12px;
+    padding: 24px 24px 0;
+  }
+
+  .search_input{
+    height: 36px;
   }
 }
 </style>

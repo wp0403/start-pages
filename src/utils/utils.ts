@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2023-06-19 13:52:09
  * @LastEditors: WangPeng
- * @LastEditTime: 2023-06-26 19:25:01
+ * @LastEditTime: 2023-06-28 21:26:29
  */
 export const getWeather = async () => {
   const key = '20561291894a3365e0a71cad618749e0';
@@ -38,5 +38,18 @@ export const handleThemeChange = (event) => {
 }
 
 /**
- * 获取本地储存的配置
+ * 分割数组成对象数组
  */
+export const splitArray = (list, number) => {
+  const result = [...list,false].reduce((acc, curr, index) => {
+    const pageIndex = Math.floor(index / number); // 计算当前元素属于哪一页
+    if (!acc[pageIndex]) {
+      // 如果当前页不存在，则创建一个新的页对象
+      acc[pageIndex] = { page: pageIndex + 1, data: [] };
+    }
+    // 将当前元素添加到对应的页对象的 data 数组中
+    acc[pageIndex].data.push(curr);
+    return acc;
+  }, []);
+  return result;
+}

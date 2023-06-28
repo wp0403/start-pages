@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2023-06-25 17:48:09
  * @LastEditors: WangPeng
- * @LastEditTime: 2023-06-27 20:34:33
+ * @LastEditTime: 2023-06-28 21:22:02
  */
 export const searchList = [
     {
@@ -163,6 +163,7 @@ export const config = {
     version: '1.0.0',
     isClearSearch: false,  // 是否清空搜索
     isSaveHistory: false,  // 是否保存历史记录
+    isHotSearch: false,  // 是否展示热搜
     bg: 'linear-gradient(to top, #9795f0 0%, #fbc8d4 100%)',  // 当前背景
     enginesId: 1, // 当前选中的搜索引擎id
     contentType: 1,  // 当前的内容展示页  1为热搜，2为书签
