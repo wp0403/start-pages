@@ -149,7 +149,7 @@ const goSearch = () => {
   justify-content: center;
   font-size: 24px;
   border: none;
-  border-radius: 0;
+  border-radius: 0 23px 23px 0;
   background-color: var(--color-blue-hover);
 }
 
