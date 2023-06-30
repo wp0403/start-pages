@@ -10,6 +10,6 @@ const props = defineProps<{
 }>()
 
 const IconFont = createFromIconfontCN({
-  scriptUrl: "/font_4132078_9xltzygux2k/iconfont.js",
+  scriptUrl: "/font_4132078_xz50zzj6bjs/iconfont.js",
 });
 </script>

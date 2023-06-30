@@ -11,7 +11,12 @@
           v-for="item in pageItem.data.filter((v) => v)"
           :key="item.id"
         >
-          <a class="item_url" :href="item.url" target="_blank">
+          <a
+            class="item_url"
+            :class="{ item_url_edit: editBookmark }"
+            :href="item.url"
+            target="_blank"
+          >
             <img
               class="item_icon"
               :src="
@@ -23,10 +28,35 @@
           <div
             class="item_title"
             :class="{ item_title_light: config.bgType === 'image' }"
+            v-if="!editBookmark"
           >
             {{ item.title }}
           </div>
+          <div class="item_title" v-if="editBookmark">
+            <SysIcon
+              @click="
+                () => {
+                  newBookmarkObj = item;
+                  addBookmarkModal = true;
+                }
+              "
+              class="item_btn"
+              type="icon-bianji"
+            />
+            <SysIcon
+              @click="removeBookmarkFunc(item)"
+              class="item_btn"
+              type="icon-RectangleCopy27"
+            />
+          </div>
         </div>
+        <a class="item item_last" v-if="bookmarkList.length === pageItem.page">
+          <SysIcon
+            @click="editBookmark = !editBookmark"
+            class="item_url item_add"
+            :type="editBookmark ? 'icon-RectangleCopy19' : 'icon-bianji'"
+          />
+        </a>
         <a class="item item_last" v-if="bookmarkList.length === pageItem.page">
           <SysIcon
             @click="addBookmarkModal = true"
@@ -81,6 +111,7 @@ import { splitArray } from "@/utils/utils";
 
 const props = defineProps(["class"]);
 const { config, changeConfig } = configStore;
+const editBookmark = ref<boolean>(false);
 const addBookmarkModal = ref<boolean>(false);
 const newBookmarkObj = ref<any>({
   id: +new Date(),
@@ -105,16 +136,33 @@ const handleResize = () => {
 };
 
 const addBookmark = () => {
-  if (newBookmarkObj.value.title && newBookmarkObj.value.url) {
-    changeConfig("bookmark", [...config.bookmark, newBookmarkObj.value]);
-    newBookmarkObj.value = {
-      id: +new Date(),
-    };
+  if (!newBookmarkObj.value.title || !newBookmarkObj.value.url) {
+    addBookmarkModal.value = false;
+    return;
   }
+  const list = config.bookmark;
+  const ind = list.findIndex((val) => val.id === newBookmarkObj.value.id);
+  if (ind >= 0) {
+    list[ind] = newBookmarkObj.value;
+    changeConfig("bookmark", list);
+  } else {
+    changeConfig("bookmark", [...list, newBookmarkObj.value]);
+  }
+  newBookmarkObj.value = {
+    id: +new Date(),
+  };
   addBookmarkModal.value = false;
 };
 
+const removeBookmarkFunc = (v) => {
+  changeConfig(
+    "bookmark",
+    config.bookmark.filter((val) => val.id !== v.id)
+  );
+};
+
 watchEffect(() => {
+  console.log(config.bookmark);
   bookmarkList.value = splitArray(config.bookmark, bookmarkNumber.value * 2);
 });
 
@@ -146,7 +194,6 @@ onBeforeUnmount(() => {
   opacity: 0;
   width: 100%;
   max-height: 100%;
-  overflow-y: auto;
   border-radius: 12px;
 }
 
@@ -158,7 +205,6 @@ onBeforeUnmount(() => {
 .carousel_item {
   width: 100%;
   max-height: 100%;
-  overflow-y: auto;
   border-radius: 12px;
   transition: all 0.4s;
   display: grid !important;
@@ -186,6 +232,11 @@ onBeforeUnmount(() => {
   background-color: var(--b-alpha-60);
   box-shadow: 0 0 10px 1px var(--b-alpha-60);
 }
+
+.carousel_item .item_url.item_url_edit {
+  animation: shakeRotate 1.8s infinite;
+}
+
 .carousel_item .item_icon {
   width: 36px;
   height: 36px;
@@ -197,6 +248,21 @@ onBeforeUnmount(() => {
   color: var(--b-alpha-60);
   font-weight: 500;
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+  height: 24px;
+}
+
+.carousel_item .item_title .item_btn {
+  margin: 0 8px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: var(--b-alpha-60);
+  color: var(--w-alpha);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .carousel_item .item_title.item_title_light {
@@ -216,11 +282,11 @@ onBeforeUnmount(() => {
   background-color: var(--w-alpha-20);
   border-radius: 10px;
   backdrop-filter: blur(5px);
-  box-shadow: 0 0 30px 1px var(--w-alpha-60);
+  box-shadow: 0 -10px 30px 1px var(--w-alpha-50);
 }
 
 .carousel_item .item_last {
-  padding-bottom: 42px;
+  padding-bottom: 38px;
 }
 
 .carousel_item .item_add {
@@ -279,6 +345,29 @@ onBeforeUnmount(() => {
 .form_item .form_item_title {
   white-space: nowrap;
   color: var(--b-alpha-80);
+}
+
+/* 定义关键帧动画 */
+@keyframes shakeRotate {
+  0% {
+    transform: translateX(0) rotate(0deg);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-10px) rotate(-5deg);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(10px) rotate(5deg);
+  }
+  100% {
+    transform: translateX(0) rotate(0deg);
+  }
 }
 
 @media screen and (max-width: 1200px) {

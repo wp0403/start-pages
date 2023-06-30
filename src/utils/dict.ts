@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2023-06-25 17:48:09
  * @LastEditors: WangPeng
- * @LastEditTime: 2023-06-30 17:13:02
+ * @LastEditTime: 2023-06-30 19:01:35
  */
 export const searchList = [
     {
@@ -189,8 +189,8 @@ export const themeList = [
     },
 ]
 
-export const config = {
-    version: '1.0.2',
+export const initConfig = {
+    version: '1.0.3',
     // 是否清空搜索
     isClearSearch: false,
     // 是否保存历史记录 

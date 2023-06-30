@@ -82,7 +82,9 @@
     <div class="config_box">
       <div class="config_item">
         <div class="config_item_title">重置默认导航</div>
-        <div class="config_reset">重置</div>
+        <div class="config_reset" @click="changeConfig('enginesId', 1)">
+          重置
+        </div>
       </div>
     </div>
     <div class="config_title">主题背景</div>

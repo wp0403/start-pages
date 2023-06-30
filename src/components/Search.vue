@@ -29,12 +29,12 @@
     </div>
     <div class="search_engines">
       <div
-        v-for="item in list.filter((v) => v.regular)"
+        v-for="item in config.searchList.filter((v) => v.regular)"
         :key="item.id"
         :class="
-          enginesActive.id === item.id ? 'engines_item_active' : 'engines_item'
+          config.enginesId === item.id ? 'engines_item_active' : 'engines_item'
         "
-        @click="changeEngines(item)"
+        @click="changeConfig('enginesId', item.id)"
       >
         {{ item.title }}
       </div>
@@ -86,12 +86,6 @@ const enginesActive = ref<any>(
 // 当前的联想词列表
 const associationalWordList = ref<string[]>([]);
 
-// 切换搜索引擎
-const changeEngines = (v) => {
-  enginesActive.value = v;
-  changeConfig("enginesId", v.id);
-};
-
 const clickEnginesList = (v) => {
   isEnginesList.value = v;
 };
@@ -140,7 +134,7 @@ const goSearch = () => {
     window.open(`${enginesActive.value.url}${searchValue.value}`);
   } else {
     const current = list.value.filter((v) => v.regular)[0];
-    changeEngines(current);
+    changeConfig("enginesId", current.id)
     window.open(`${current.url}${searchValue.value}`);
   }
 };

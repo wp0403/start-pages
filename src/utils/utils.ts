@@ -41,7 +41,7 @@ export const handleThemeChange = (event) => {
  * 分割数组成对象数组
  */
 export const splitArray = (list, number) => {
-  const result = [...list,false].reduce((acc, curr, index) => {
+  const result = [...list,false,false].reduce((acc, curr, index) => {
     const pageIndex = Math.floor(index / number); // 计算当前元素属于哪一页
     if (!acc[pageIndex]) {
       // 如果当前页不存在，则创建一个新的页对象
