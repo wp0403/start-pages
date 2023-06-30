@@ -200,6 +200,10 @@ watchEffect(() => {
   display: block;
 }
 
+.search_list_box:hover{
+  display: block;
+}
+
 .search_list_box {
   display: none;
   position: absolute;
