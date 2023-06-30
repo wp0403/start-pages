@@ -4,21 +4,22 @@
  * @Author: WangPeng
  * @Date: 2023-06-20 15:26:46
  * @LastEditors: WangPeng
- * @LastEditTime: 2023-06-20 17:45:28
+ * @LastEditTime: 2023-06-29 18:15:18
  */
-import {watch,ref} from 'vue'
 import { handleThemeChange } from '@/utils/utils'
-import themeStore from '@/store/theme'
+import configStore from "@/store/config";
+
+const { changeConfig, config } = configStore;
 
 const useTheme = () => {
-    const t = ref(1);
     // 切换主题
     const themeSwitch = (event) => {
         if (event === "click") {
             document.documentElement.classList.toggle("dark");
-            themeStore.changeTheme(themeStore.theme === 1 ? 2 : 1);
+            const isDark = document.documentElement.classList.contains('dark');
+            changeConfig('theme', !isDark)
         } else {
-            themeStore.changeTheme(handleThemeChange(event))
+            config.isAutoChangeTheme && changeConfig('theme', handleThemeChange(event))
         }
     };
 
@@ -27,7 +28,17 @@ const useTheme = () => {
     );
 
     const init = () => {
-        themeSwitch(darkModeMediaQuery);
+        if(config.isAutoChangeTheme){
+            themeSwitch(darkModeMediaQuery);
+        }else{
+            if(config.theme){
+                document.documentElement.classList.remove('dark');
+                document.documentElement.classList.add('light');
+            }else{
+                document.documentElement.classList.add('dark');
+                document.documentElement.classList.remove('light');
+            }
+        }
     }
 
     const addMediaQuery = () => {
@@ -40,12 +51,7 @@ const useTheme = () => {
         darkModeMediaQuery.removeEventListener("change", themeSwitch);
     }
 
-    watch(() => themeStore.theme,(v) => {
-        t.value = v;
-    })
-
     return {
-        theme: t,
         themeSwitch,
         init,
         addMediaQuery,

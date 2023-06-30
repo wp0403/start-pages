@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2023-06-25 17:48:09
  * @LastEditors: WangPeng
- * @LastEditTime: 2023-06-28 21:22:02
+ * @LastEditTime: 2023-06-29 18:40:17
  */
 export const searchList = [
     {
@@ -145,30 +145,75 @@ export const bgList = [
     {
         id: 1,
         title: '少年的笔记',
-        background: 'linear-gradient(to top, #9795f0 0%, #fbc8d4 100%)'
+        background: 'linear-gradient(to top, #9795f0 0%, #fbc8d4 100%)',
+        type: 'color',
     },
     {
         id: 2,
         title: '褪色的夕阳',
-        background: 'linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%)'
+        background: 'linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%)',
+        type: 'color',
     },
     {
         id: 3,
         title: '夕阳下的雨',
-        background: 'linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%)'
+        background: 'linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%)',
+        type: 'color',
+    },
+    {
+        id: 4,
+        title: 'bg00001',
+        background: 'url(/src/assets/images/bg00001.jpg)',
+        type: 'image',
+    },
+    {
+        id: 5,
+        title: 'bg00003',
+        background: 'url(/src/assets/images/bg00003.jpg)',
+        type: 'image',
+    },
+]
+
+export const themeList = [
+    {
+        id: 'auto',
+        name: '跟随系统'
+    },
+    {
+        id: 'light',
+        name: '亮色'
+    },
+    {
+        id: 'dark',
+        name: '暗色'
     },
 ]
 
 export const config = {
-    version: '1.0.0',
-    isClearSearch: false,  // 是否清空搜索
-    isSaveHistory: false,  // 是否保存历史记录
-    isHotSearch: false,  // 是否展示热搜
-    bg: 'linear-gradient(to top, #9795f0 0%, #fbc8d4 100%)',  // 当前背景
-    enginesId: 1, // 当前选中的搜索引擎id
-    contentType: 1,  // 当前的内容展示页  1为热搜，2为书签
-    theme: 'auto',  // 当前的主题 light为亮色，dark为暗色，auto为跟随系统
+    version: '1.0.2',
+    // 是否清空搜索
+    isClearSearch: false,
+    // 是否保存历史记录 
+    isSaveHistory: false,
+    // 是否展示热搜 
+    isHotSearch: true,
+    // 当前背景
+    bg: 'linear-gradient(to top, #9795f0 0%, #fbc8d4 100%)',
+    // 背景类型
+    bgType: 'color',
+    // 是否展示壁纸暗色滤镜
+    isBgDarkFilter: true,
+    // 当前选中的搜索引擎id
+    enginesId: 1,
+    // 当前的内容展示页  1为热搜，2为书签
+    contentType: 1,
+    // 是否自动切换主题
+    isAutoChangeTheme: false,
+    // 当前的主题 true为亮色，false为暗色
+    theme: true,
     currentHotSearch: 1,  // 当前热搜
+    // 是否展示一言
+    isIan: true,
     searchList,
     bookmark,
     bgList,

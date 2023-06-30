@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2023-06-19 13:52:09
  * @LastEditors: WangPeng
- * @LastEditTime: 2023-06-28 21:26:29
+ * @LastEditTime: 2023-06-29 18:01:42
  */
 export const getWeather = async () => {
   const key = '20561291894a3365e0a71cad618749e0';
@@ -29,11 +29,11 @@ export const handleThemeChange = (event) => {
   if (event.matches) {
     // console.log('light')
     document.documentElement.classList.remove("dark");
-    return 2;
+    return true;
   } else {
     // console.log('dark')
     document.documentElement.classList.add("dark");
-    return 1;
+    return false;
   }
 }
 

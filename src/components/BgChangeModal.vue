@@ -4,38 +4,60 @@
  * @Author: WangPeng
  * @Date: 2023-06-20 18:13:13
  * @LastEditors: WangPeng
- * @LastEditTime: 2023-06-26 19:54:50
+ * @LastEditTime: 2023-06-30 11:06:45
 -->
 <template>
-  <div class="bg" :class="{bg_dark: theme === 1}" :style="{ backgroundImage: config.bg }"></div>
+  <div
+    class="bg_box"
+    :class="{ bg_dark: !config.theme && config.bgType !== 'image' }"
+  >
+    <div class="bg" :style="{ backgroundImage: config.bg }"></div>
+    <div class="cover" v-if="config.isBgDarkFilter"></div>
+  </div>
 </template>
 
 <script setup lang="ts">
-import useTheme from "@/utils/hooks/theme";
 import configStore from "@/store/config";
 
 const { config } = configStore;
-
-const { theme } = useTheme();
-// import startPagesDB from "@/modules/indexedDB";
-
-// const showDrawer = () => {
-//   visible.value = true;
-// };
 </script>
 
 <style scoped>
+.bg_box {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: -3;
+}
 .bg {
   width: 100vw;
   height: 100vh;
   position: fixed;
   left: 0;
   top: 0;
-  z-index: -1;
+  z-index: -3;
   transition: 0.2s ease-in-out;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-.bg_dark {
-  mix-blend-mode: difference;
+.cover {
+  z-index: -1;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--bg-b-10);
+  transition: 0.25s;
+}
+
+.dark .cover {
+  background-image: radial-gradient(
+      rgba(50, 50, 50, 0) 0,
+      rgba(50, 50, 50, 0.3) 100%
+    ),
+    radial-gradient(rgba(50, 50, 50, 0) 33%, rgba(50, 50, 50, 0.3) 166%);
 }
 </style>

@@ -6,7 +6,11 @@
         v-for="pageItem in bookmarkList"
         :key="pageItem.page"
       >
-        <div class="item" v-for="item in pageItem.data.filter(v => v)" :key="item.id">
+        <div
+          class="item"
+          v-for="item in pageItem.data.filter((v) => v)"
+          :key="item.id"
+        >
           <a class="item_url" :href="item.url" target="_blank">
             <img
               class="item_icon"
@@ -16,23 +20,71 @@
               alt=""
             />
           </a>
-          <div class="item_title">{{ item.title }}</div>
+          <div
+            class="item_title"
+            :class="{ item_title_light: config.bgType === 'image' }"
+          >
+            {{ item.title }}
+          </div>
         </div>
         <a class="item item_last" v-if="bookmarkList.length === pageItem.page">
-          <SysIcon class="item_url item_add" type="icon-RectangleCopy17" />
+          <SysIcon
+            @click="addBookmarkModal = true"
+            class="item_url item_add"
+            type="icon-RectangleCopy17"
+          />
         </a>
       </div>
     </a-carousel>
+    <a-modal
+      v-model:visible="addBookmarkModal"
+      centered
+      :footer="null"
+      :bodyStyle="{ paddingTop: '42px' }"
+      @ok="addBookmarkModal = false"
+    >
+      <div class="form_item">
+        <div class="form_item_title">标题：</div>
+        <a-input
+          v-model:value="newBookmarkObj.title"
+          placeholder="请输入网站标题"
+          :bordered="false"
+        />
+      </div>
+      <div class="form_item">
+        <div class="form_item_title">链接：</div>
+        <a-input
+          v-model:value="newBookmarkObj.url"
+          placeholder="请输入网站链接"
+          :bordered="false"
+        />
+      </div>
+      <div class="form_item">
+        <div class="form_item_title">图标：</div>
+        <a-input
+          v-model:value="newBookmarkObj.icon"
+          placeholder="请输入网站图标链接"
+          :bordered="false"
+        />
+      </div>
+      <div class="form_item">
+        <a-button type="primary" @click="addBookmark">提交</a-button>
+      </div>
+    </a-modal>
   </div>
 </template>
 
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref } from "vue";
+import { onBeforeUnmount, onMounted, ref, watchEffect } from "vue";
 import configStore from "@/store/config";
 import { splitArray } from "@/utils/utils";
 
 const props = defineProps(["class"]);
-const { config } = configStore;
+const { config, changeConfig } = configStore;
+const addBookmarkModal = ref<boolean>(false);
+const newBookmarkObj = ref<any>({
+  id: +new Date(),
+});
 
 const bookmarkNumber = ref<number>(5);
 const bookmarkList = ref(splitArray(config.bookmark, bookmarkNumber.value * 2));
@@ -50,8 +102,21 @@ const handleResize = () => {
     bookmarkNumber.value = 3;
   }
   bookmarkList.value = splitArray(config.bookmark, bookmarkNumber.value * 2);
-  
 };
+
+const addBookmark = () => {
+  if (newBookmarkObj.value.title && newBookmarkObj.value.url) {
+    changeConfig("bookmark", [...config.bookmark, newBookmarkObj.value]);
+    newBookmarkObj.value = {
+      id: +new Date(),
+    };
+  }
+  addBookmarkModal.value = false;
+};
+
+watchEffect(() => {
+  bookmarkList.value = splitArray(config.bookmark, bookmarkNumber.value * 2);
+});
 
 // 初始化时添加事件监听器
 onMounted(() => {
@@ -113,6 +178,7 @@ onBeforeUnmount(() => {
 .carousel_item .item_url {
   padding: 24px;
   background-color: var(--w-alpha-30);
+  backdrop-filter: blur(5px);
   border-radius: 12px;
   transition: all 0.25s;
 }
@@ -131,6 +197,26 @@ onBeforeUnmount(() => {
   color: var(--b-alpha-60);
   font-weight: 500;
   white-space: nowrap;
+}
+
+.carousel_item .item_title.item_title_light {
+  color: var(--txt-w-pure);
+  position: relative;
+}
+
+.carousel_item .item_title.item_title_light::after {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: -1;
+  content: "";
+  transform: translate(-50%, -30%);
+  width: 100%;
+  height: 60%;
+  background-color: var(--w-alpha-20);
+  border-radius: 10px;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 0 30px 1px var(--w-alpha-60);
 }
 
 .carousel_item .item_last {
@@ -160,26 +246,39 @@ onBeforeUnmount(() => {
   justify-content: center;
 }
 
-.bookmark .ant-carousel :deep(.slick-dots) li{
+.bookmark .ant-carousel :deep(.slick-dots) li {
   display: inline-block;
   width: auto;
   height: auto;
   margin: 0;
 }
 
-.bookmark .ant-carousel :deep(.slick-dots) li button{
+.bookmark .ant-carousel :deep(.slick-dots) li button {
   width: 12px;
   height: 12px;
-  background-color: var(--w-alpha-30);
+  background-color: var(--w-alpha-60);
   margin: 0 8px;
   border-radius: 50%;
   cursor: pointer;
+  opacity: 1;
 }
 
-.bookmark .ant-carousel :deep(.slick-dots) .slick-active button{
+.bookmark .ant-carousel :deep(.slick-dots) .slick-active button {
   width: 16px;
   height: 16px;
   background-color: var(--w-alpha-80);
+}
+
+.form_item {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+  justify-content: center;
+}
+
+.form_item .form_item_title {
+  white-space: nowrap;
+  color: var(--b-alpha-80);
 }
 
 @media screen and (max-width: 1200px) {

@@ -6,10 +6,26 @@
         type="text"
         placeholder="搜索"
         v-model="searchValue"
+        @keyup.enter="goSearch"
       />
       <a-button class="btn" type="primary" @click="goSearch">
         <SysIcon type="icon-RectangleCopy2" />
       </a-button>
+      <div class="search_list_box" v-if="associationalWordList.length">
+        <div
+          class="search_item"
+          v-for="item in associationalWordList"
+          :key="item"
+          @click="
+            () => {
+              searchValue = item;
+              goSearch();
+            }
+          "
+        >
+          {{ item }}
+        </div>
+      </div>
     </div>
     <div class="search_engines">
       <div
@@ -52,11 +68,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, watchEffect } from "vue";
 import SysIcon from "@/components/SysIcon.vue";
 import configStore from "@/store/config";
 
-const {config,changeConfig} = configStore;
+const { config, changeConfig } = configStore;
 
 const list = ref<any[]>(config.searchList);
 // 当前搜索的内容
@@ -64,18 +80,23 @@ const searchValue = ref<string>("");
 // 当前搜索引擎列表框是否展示
 const isEnginesList = ref<boolean>(false);
 // 当前选中的搜索引擎
-const enginesActive = ref<any>(config.searchList.find(v => v.id === config.enginesId));
+const enginesActive = ref<any>(
+  config.searchList.find((v) => v.id === config.enginesId)
+);
+// 当前的联想词列表
+const associationalWordList = ref<string[]>([]);
 
 // 切换搜索引擎
 const changeEngines = (v) => {
   enginesActive.value = v;
-  changeConfig('enginesId', v.id);
+  changeConfig("enginesId", v.id);
 };
 
 const clickEnginesList = (v) => {
   isEnginesList.value = v;
 };
 
+// 设置当前固定的搜索引擎
 const clickEnginesListItem = (v) => {
   if (list.value.filter((v1) => v1.regular).length <= 1 && v.regular) return;
   if (list.value.filter((v1) => v1.regular).length >= 3 && !v.regular) return;
@@ -88,13 +109,29 @@ const clickEnginesListItem = (v) => {
     }
     return item;
   });
-  changeConfig('searchList', list.value);
+  changeConfig("searchList", list.value);
+};
+
+// 获取联想词
+const getSearchList = () => {
+  (window as any).associationalWord = (res) => {
+    associationalWordList.value = res.s;
+  };
+  if (!searchValue.value) {
+    associationalWordList.value = [];
+    return;
+  }
+  const script = document.createElement("script");
+  script.src = `https://suggestion.baidu.com/su?wd=${searchValue.value}&cb=associationalWord`;
+  script.async = true;
+  document.body.appendChild(script);
 };
 
 // 跳转搜索
 const goSearch = () => {
-  if(config.isClearSearch){
-    searchValue.value = '';
+  if (config.isClearSearch) {
+    searchValue.value = "";
+    associationalWordList.value = [];
   }
   const flag = list.value
     .filter((v) => v.regular)
@@ -107,6 +144,10 @@ const goSearch = () => {
     window.open(`${current.url}${searchValue.value}`);
   }
 };
+
+watchEffect(() => {
+  getSearchList();
+});
 </script>
 
 <style scoped>
@@ -125,7 +166,7 @@ const goSearch = () => {
   display: flex;
   align-items: center;
   border-radius: 23px;
-  overflow: hidden;
+  position: relative;
 }
 
 .input {
@@ -135,6 +176,7 @@ const goSearch = () => {
   outline-color: var(--color-blue-border-hover);
   padding: 0 24px;
   border-radius: 23px 0 0 23px;
+  overflow: hidden;
 }
 
 .input:focus {
@@ -151,6 +193,44 @@ const goSearch = () => {
   border: none;
   border-radius: 0 23px 23px 0;
   background-color: var(--color-blue-hover);
+  overflow: hidden;
+}
+
+.input:focus~.search_list_box{
+  display: block;
+}
+
+.search_list_box {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: calc(100% + 12px);
+  z-index: 10;
+  width: 100%;
+  background-color: var(--w-alpha-70);
+  border-radius: 23px;
+  box-shadow: 0 3px 10px 3px var(--w-alpha-50);
+  backdrop-filter: blur(8px);
+  padding: 24px 12px;
+  overflow-y: auto;
+}
+.search_list_box .search_item {
+  padding: 8px 12px;
+  color: var(--b-alpha-90);
+  font-size: 14px;
+  white-space: nowrap;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  transition: 0.4s;
+  border-radius: 16px;
+}
+
+.search_list_box .search_item:hover {
+  padding-left: 24px;
+  background-color: var(--w-alpha-90);
+  font-weight: 700;
 }
 
 .search_engines {
@@ -255,7 +335,7 @@ const goSearch = () => {
 }
 
 @media screen and (max-width: 1000px) {
-  .search_box{
+  .search_box {
     padding: 60px 24px 12px;
   }
 }
@@ -270,17 +350,17 @@ const goSearch = () => {
     width: 70px;
   }
 
-  .search_box{
+  .search_box {
     padding: 60px 24px 0;
   }
 }
 
 @media screen and (max-width: 600px) {
-  .search_box{
+  .search_box {
     padding: 24px 24px 0;
   }
 
-  .search_input{
+  .search_input {
     height: 36px;
   }
 }

@@ -1,14 +1,13 @@
 <template>
   <div class="head">
     <div class="left">
-      <img class="logo" v-if="theme === 1" :src="logo_white" />
-      <img class="logo" v-if="theme === 2" :src="logo_black" />
+      <img class="logo" :src="config.theme ? logo_black : logo_white" />
     </div>
     <div class="right">
       <div class="theme_change_btn" @click="themeSwitch('click')">
         <SysIcon
           class="theme_change_btn_icon"
-          :type="theme === 2 ? 'icon-taiyangtianqi' : 'icon-yueliang'"
+          :type="config.theme ? 'icon-taiyangtianqi' : 'icon-yueliang'"
         />
       </div>
       <div class="theme_change_btn" @click="clickSetUp(true)">
@@ -30,34 +29,37 @@
         <div class="config_item_title">自动清空搜索栏</div>
         <a-switch
           size="small"
-          v-model:checked="configObj.isClearSearch"
-          @change="changeConfig('isClearSearch', configObj.isClearSearch)"
+          v-model:checked="config.isClearSearch"
+          @change="changeConfig('isClearSearch', config.isClearSearch)"
         />
       </div>
       <div class="config_item">
         <div class="config_item_title">保存历史记录</div>
         <a-switch
           size="small"
-          v-model:checked="configObj.isSaveHistory"
-          @change="changeConfig('isSaveHistory', configObj.isSaveHistory)"
+          v-model:checked="config.isSaveHistory"
+          @change="changeConfig('isSaveHistory', config.isSaveHistory)"
         />
       </div>
+    </div>
+    <div class="config_title">功能</div>
+    <div class="config_box">
       <div class="config_item">
         <div class="config_item_title">是否展示热搜</div>
         <a-switch
           size="small"
-          v-model:checked="configObj.isHotSearch"
-          @change="changeConfig('isHotSearch', configObj.isHotSearch)"
+          v-model:checked="config.isHotSearch"
+          @change="changeConfig('isHotSearch', config.isHotSearch)"
         />
       </div>
-      <div class="config_item" v-if="configObj.isHotSearch">
+      <div class="config_item" v-if="config.isHotSearch">
         <div class="config_item_title">默认热搜选择</div>
         <a-select
           ref="select"
           v-model:value="config.currentHotSearch"
           style="min-width: 80px"
           size="small"
-          @change="handleChange"
+          @change="handleChangeCurrentHotSearch"
         >
           <a-select-option
             :value="item.id"
@@ -67,6 +69,14 @@
           >
         </a-select>
       </div>
+      <div class="config_item">
+        <div class="config_item_title">是否展示一言</div>
+        <a-switch
+          size="small"
+          v-model:checked="config.isIan"
+          @change="changeConfig('isIan', config.isIan)"
+        />
+      </div>
     </div>
     <div class="config_title">导航</div>
     <div class="config_box">
@@ -75,7 +85,7 @@
         <div class="config_reset">重置</div>
       </div>
     </div>
-    <div class="config_title">初始化</div>
+    <div class="config_title">主题背景</div>
     <div class="config_box">
       <div class="config_item">
         <div class="config_item_title">背景自定义</div>
@@ -91,11 +101,37 @@
               ></div>
             </div>
           </template>
-          <div
-            class="config_bg"
-            :style="{ backgroundImage: configObj.bg }"
-          ></div>
+          <div class="config_bg" :style="{ backgroundImage: config.bg }"></div>
         </a-popover>
+      </div>
+      <div class="config_item">
+        <div class="config_item_title">浅色主题</div>
+        <a-switch
+          size="small"
+          v-model:checked="config.theme"
+          @change="
+            () => {
+              changeConfig('theme', config.theme);
+              themeSwitch('click');
+            }
+          "
+        />
+      </div>
+      <div class="config_item">
+        <div class="config_item_title">自动切换主题</div>
+        <a-switch
+          size="small"
+          v-model:checked="config.isAutoChangeTheme"
+          @change="changeConfig('isAutoChangeTheme', config.isAutoChangeTheme)"
+        />
+      </div>
+      <div class="config_item">
+        <div class="config_item_title">背景暗色滤镜</div>
+        <a-switch
+          size="small"
+          v-model:checked="config.isBgDarkFilter"
+          @change="changeConfig('isBgDarkFilter', config.isBgDarkFilter)"
+        />
       </div>
     </div>
     <div class="config_title">重置</div>
@@ -118,9 +154,8 @@ import configStore from "@/store/config";
 
 const { config, changeConfig, resetConfig } = configStore;
 
-const { theme, themeSwitch } = useTheme();
+const { themeSwitch } = useTheme();
 const visible = ref<boolean>(false);
-const configObj = ref<any>(config);
 const drawerWidth = ref<number | string>(378);
 
 const clickSetUp = (v) => {
@@ -131,7 +166,7 @@ const changeBg = (v) => {
   changeConfig("bg", v);
 };
 
-const handleChange = (v) => {
+const handleChangeCurrentHotSearch = (v) => {
   changeConfig("currentHotSearch", v);
 };
 
@@ -264,14 +299,6 @@ onBeforeUnmount(() => {
   border-radius: 50%;
   margin: 5px;
   cursor: pointer;
-}
-
-.dark .bg_item {
-  mix-blend-mode: difference;
-}
-
-.dark .config_bg {
-  mix-blend-mode: difference;
 }
 
 @media screen and (max-width: 700px) {

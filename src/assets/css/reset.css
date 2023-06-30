@@ -80,3 +80,22 @@
   color: var(--b-alpha-90) !important;
 }
 /* select 结束 */
+
+/* popover 开始 */
+.ant-popover .ant-popover-arrow-content{
+  background-color: var(--bg-w-245);
+}
+.ant-popover .ant-popover-inner {
+  background-color: var(--bg-w-245);
+  box-shadow: 0 3px 6px -4px var(--b-alpha-10),
+    0 6px 16px 0 var(--b-alpha-10), 0 9px 28px 8px var(--b-alpha-5);
+}
+/* popover 结束 */
+
+/* input 开始 */
+.ant-input{
+  background-color: transparent !important;
+  color: var(--b-alpha-90) !important;
+  border-bottom: 1px solid var(--b-alpha) !important;
+}
+/* input 结束 */

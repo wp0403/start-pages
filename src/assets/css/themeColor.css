@@ -1,6 +1,6 @@
 :root {
-  --ct-body-font-family: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft Yahei', 'Microsoft Jhenghei',
-    sans-serif;
+  --ct-body-font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft Yahei",
+    "Microsoft Jhenghei", sans-serif;
   --ct-theme: linear-gradient(rgb(57, 89, 138), rgb(121, 215, 237));
   --ct-theme-border: 2px solid rgb(255, 255, 255);
   --w-alpha-0: rgba(255, 255, 255, 0);
@@ -39,6 +39,7 @@
   --bg-w-245: rgb(245, 245, 245);
   --bg-w-235: rgb(235, 235, 235);
   --bg-w-225: rgb(225, 225, 225);
+  --bg-b-10: rgb(0, 0, 0, 0.1);
   --purple-primary: #727cf5;
   --purple-primary-active: #575dcf;
   --purple-primary-hover: #a1acff;
@@ -56,7 +57,7 @@
   --color-blue-bg-hover: #bae0ff;
   --color-blue-border: #91caff;
   --color-blue-border-hover: #69b1ff;
-  --bg-w-220: rgb(220,220,220);
+  --bg-w-220: rgb(220, 220, 220);
 }
 
 .dark {
@@ -110,7 +111,7 @@
   --color-blue-bg-hover: #112545;
   --color-blue-border: #15325b;
   --color-blue-border-hover: #15417e;
-  --bg-w-220: rgb(55,55,55);
+  --bg-w-220: rgb(55, 55, 55);
 }
 
 @media (prefers-color-scheme: dark) {

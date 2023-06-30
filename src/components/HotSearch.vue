@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2023-06-25 19:00:58
  * @LastEditors: WangPeng
- * @LastEditTime: 2023-06-28 20:48:11
+ * @LastEditTime: 2023-06-30 10:28:30
 -->
 <template>
   <div class="content">
@@ -49,7 +49,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { ref, watchEffect } from "vue";
 import SysIcon from "@/components/SysIcon.vue";
 import Bookmark from "@/components/Bookmark.vue";
 import { getHotSearchList } from "@/services/hotSearch";
@@ -71,9 +71,8 @@ const getHotSearch = async () => {
     hotList.value = res;
   });
 };
-getHotSearch();
-watch(config, async () => {
-  await getHotSearch();
+watchEffect(() => {
+  getHotSearch();
 });
 
 const changeCurrent = (v) => {
@@ -99,7 +98,8 @@ const changeCurrent = (v) => {
   opacity: 0;
   width: 100%;
   max-height: 100%;
-  background-color: var(--w-alpha-30);
+  background-color: var(--w-alpha-50);
+  backdrop-filter: blur(5px);
   overflow-y: auto;
   border-radius: 12px;
   padding: 24px;
@@ -126,7 +126,7 @@ const changeCurrent = (v) => {
 }
 
 .hot_item:hover {
-  background-color: var(--w-alpha-30);
+  background-color: var(--w-alpha-40);
   border-radius: 8px;
 }
 
