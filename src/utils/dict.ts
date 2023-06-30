@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2023-06-25 17:48:09
  * @LastEditors: WangPeng
- * @LastEditTime: 2023-06-29 18:40:17
+ * @LastEditTime: 2023-06-30 17:10:11
  */
 export const searchList = [
     {
@@ -163,13 +163,13 @@ export const bgList = [
     {
         id: 4,
         title: 'bg00001',
-        background: 'url(/src/assets/images/bg00001.jpg)',
+        background: 'url(/assets/images/bg00001.jpg)',
         type: 'image',
     },
     {
         id: 5,
         title: 'bg00003',
-        background: 'url(/src/assets/images/bg00003.jpg)',
+        background: 'url(/assets/images/bg00003.jpg)',
         type: 'image',
     },
 ]
