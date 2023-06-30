@@ -367,5 +367,9 @@ watchEffect(() => {
   .search_input {
     height: 36px;
   }
+
+  .search_list_box{
+    display: none !important;
+  }
 }
 </style>
