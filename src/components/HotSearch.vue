@@ -66,6 +66,7 @@ const getHotSearch = async () => {
   const current = config.hotSearchList.find(
     (v) => v.id === config.currentHotSearch
   );
+  if(!current?.url) return;
   await getHotSearchList(current.url).then((res) => {
     loading.value = false;
     hotList.value = res;
