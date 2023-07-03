@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "shimmer起始页",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description" : "替代传统搜索首页，提供更多的可配置设置",
   "chrome_url_overrides": {
     "newtab": "index.html"
