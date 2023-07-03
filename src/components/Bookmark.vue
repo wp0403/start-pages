@@ -162,7 +162,6 @@ const removeBookmarkFunc = (v) => {
 };
 
 watchEffect(() => {
-  console.log(config.bookmark);
   bookmarkList.value = splitArray(config.bookmark, bookmarkNumber.value * 2);
 });
 

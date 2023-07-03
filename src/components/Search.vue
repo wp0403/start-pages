@@ -68,7 +68,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watchEffect } from "vue";
+import { ref, watchEffect, computed } from "vue";
 import SysIcon from "@/components/SysIcon.vue";
 import configStore from "@/store/config";
 
@@ -80,7 +80,7 @@ const searchValue = ref<string>("");
 // 当前搜索引擎列表框是否展示
 const isEnginesList = ref<boolean>(false);
 // 当前选中的搜索引擎
-const enginesActive = ref<any>(
+const enginesActive: any = computed(() =>
   config.searchList.find((v) => v.id === config.enginesId)
 );
 // 当前的联想词列表
@@ -134,7 +134,7 @@ const goSearch = () => {
     window.open(`${enginesActive.value.url}${searchValue.value}`);
   } else {
     const current = list.value.filter((v) => v.regular)[0];
-    changeConfig("enginesId", current.id)
+    changeConfig("enginesId", current.id);
     window.open(`${current.url}${searchValue.value}`);
   }
 };
@@ -190,11 +190,11 @@ watchEffect(() => {
   overflow: hidden;
 }
 
-.input:focus~.search_list_box{
+.input:focus ~ .search_list_box {
   display: block;
 }
 
-.search_list_box:hover{
+.search_list_box:hover {
   display: block;
 }
 
@@ -362,7 +362,7 @@ watchEffect(() => {
     height: 36px;
   }
 
-  .search_list_box{
+  .search_list_box {
     display: none !important;
   }
 }
