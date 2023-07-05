@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2023-06-26 11:55:35
  * @LastEditors: WangPeng
- * @LastEditTime: 2023-06-29 18:59:06
+ * @LastEditTime: 2023-07-05 16:06:09
 -->
 <template>
   <div class="footer" :class="{ footer_light: config.bgType === 'image' }">
@@ -51,11 +51,12 @@ getIan().then((res) => {
   padding: 24px;
 }
 
-.footer_light .ian,.footer_light .item{
+.footer_light .ian,
+.footer_light .item {
   color: var(--bg-w-235) !important;
 }
 
-.footer_light .item_dian{
+.footer_light .item_dian {
   background-color: var(--bg-w-235) !important;
 }
 
@@ -85,5 +86,14 @@ getIan().then((res) => {
   margin: 0 12px;
   border-radius: 50%;
   background-color: var(--b-alpha);
+}
+
+@media screen and (max-width: 800px) {
+  .footer {
+    padding: 12px 24px 8px;
+  }
+  .ian {
+    padding: 0 0 12px;
+  }
 }
 </style>

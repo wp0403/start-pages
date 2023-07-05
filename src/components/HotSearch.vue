@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2023-06-25 19:00:58
  * @LastEditors: WangPeng
- * @LastEditTime: 2023-06-30 10:28:30
+ * @LastEditTime: 2023-07-05 16:08:24
 -->
 <template>
   <div class="content">
@@ -100,7 +100,8 @@ const changeCurrent = (v) => {
   width: 100%;
   max-height: 100%;
   background-color: var(--w-alpha-50);
-  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(30px) saturate(1.5) !important;
+  backdrop-filter: blur(30px) saturate(1.5) !important;
   overflow-y: auto;
   border-radius: 12px;
   padding: 24px;
@@ -162,9 +163,9 @@ const changeCurrent = (v) => {
 
 .btn_box {
   position: absolute;
-  bottom: -24px;
+  bottom: -12px;
   width: 100%;
-  height: 24px;
+  height: 12px;
   display: flex;
   align-items: center;
   justify-content: center;

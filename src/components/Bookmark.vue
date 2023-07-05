@@ -223,7 +223,8 @@ onBeforeUnmount(() => {
 .carousel_item .item_url {
   padding: 24px;
   background-color: var(--w-alpha-30);
-  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(30px) saturate(1.5) !important;
+  backdrop-filter: blur(30px) saturate(1.5) !important;
   border-radius: 12px;
   transition: all 0.25s;
 }
@@ -276,8 +277,8 @@ onBeforeUnmount(() => {
   z-index: -1;
   content: "";
   transform: translate(-50%, -30%);
-  width: 100%;
-  height: 60%;
+  width: 110%;
+  height: 90%;
   background-color: var(--w-alpha-20);
   border-radius: 10px;
   backdrop-filter: blur(5px);

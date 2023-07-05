@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2023-06-20 18:13:13
  * @LastEditors: WangPeng
- * @LastEditTime: 2023-06-30 11:06:45
+ * @LastEditTime: 2023-07-05 15:51:17
 -->
 <template>
   <div
@@ -50,6 +50,7 @@ const { config } = configStore;
   width: 100vw;
   height: 100vh;
   background-color: var(--bg-b-10);
+  filter: blur(10px);
   transition: 0.25s;
 }
 

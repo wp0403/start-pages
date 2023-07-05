@@ -107,18 +107,13 @@ const clickEnginesListItem = (v) => {
 };
 
 // 获取联想词
-const getSearchList = () => {
-  (window as any).associationalWord = (res) => {
-    associationalWordList.value = res.s;
-  };
-  if (!searchValue.value) {
-    associationalWordList.value = [];
-    return;
-  }
-  const script = document.createElement("script");
-  script.src = `https://suggestion.baidu.com/su?wd=${searchValue.value}&cb=associationalWord`;
-  script.async = true;
-  document.body.appendChild(script);
+const getSearchList = async () => {
+  if(!searchValue.value) return;
+  const res = await fetch(
+    `https://wp-boke.work/api/getSearchList?keywork=${searchValue.value}`
+  );
+  const data: any = await res.json();
+  associationalWordList.value = Array.isArray(data.data) ? data.data : [];
 };
 
 // 跳转搜索
@@ -293,7 +288,8 @@ watchEffect(() => {
   width: 100%;
   max-height: 300px;
   background-color: var(--w-alpha-90);
-  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(30px) saturate(1.5) !important;
+  backdrop-filter: blur(30px) saturate(1.5) !important;
   border-radius: 8px;
   padding: 8px;
   box-shadow: 0 3px 20px 1px var(--w-alpha-30);
@@ -308,7 +304,8 @@ watchEffect(() => {
   width: 100vw;
   height: 100vh;
   background-color: var(--b-alpha-60);
-  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px) saturate(1.5) !important;
+  backdrop-filter: blur(5px) saturate(1.5) !important;
 }
 
 .engines_list_item {
