@@ -9,6 +9,5 @@
   },
   "chrome_url_overrides": {
     "newtab": "index.html"
-  },
-  "host_permissions": ["<all_urls>"]
+  }
 }
