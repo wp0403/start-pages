@@ -120,7 +120,7 @@
         />
       </div>
       <div class="config_item">
-        <div class="config_item_title">自动切换主题</div>
+        <div class="config_item_title">主题跟随系统</div>
         <a-switch
           size="small"
           v-model:checked="config.isAutoChangeTheme"

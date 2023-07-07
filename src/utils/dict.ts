@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2023-06-25 17:48:09
  * @LastEditors: WangPeng
- * @LastEditTime: 2023-06-30 19:01:35
+ * @LastEditTime: 2023-07-07 11:20:05
  */
 export const searchList = [
     {
@@ -190,7 +190,7 @@ export const themeList = [
 ]
 
 export const initConfig = {
-    version: '1.0.3',
+    version: '1.0.4',
     // 是否清空搜索
     isClearSearch: false,
     // 是否保存历史记录 
@@ -198,7 +198,7 @@ export const initConfig = {
     // 是否展示热搜 
     isHotSearch: true,
     // 当前背景
-    bg: 'linear-gradient(to top, #9795f0 0%, #fbc8d4 100%)',
+    bg: 'url(/images/bg00001.jpg)',
     // 背景类型
     bgType: 'color',
     // 是否展示壁纸暗色滤镜

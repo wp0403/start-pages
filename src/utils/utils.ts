@@ -4,15 +4,15 @@
  * @Author: WangPeng
  * @Date: 2023-06-19 13:52:09
  * @LastEditors: WangPeng
- * @LastEditTime: 2023-06-29 18:01:42
+ * @LastEditTime: 2023-07-06 17:07:53
  */
 export const getWeather = async () => {
   const key = '20561291894a3365e0a71cad618749e0';
   // 使用第三方IP地址查询API来获取当前IP地址
-  fetch(`https://restapi.amap.com/v3/ip?key=${key}`)
+  await fetch(`https://restapi.amap.com/v3/ip?key=${key}`)
     .then(response => response.json())
-    .then(data => {
-      fetch(`https://restapi.amap.com/v3/weather/weatherInfo?key=${key}&city=${data.adcode}&extensions=base`)
+    .then(async data => {
+      await fetch(`https://restapi.amap.com/v3/weather/weatherInfo?key=${key}&city=${data.adcode}&extensions=base`)
         .then(response => response.json())
         .then(res => {
           return res;
