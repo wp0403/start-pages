@@ -110,7 +110,7 @@ const clickEnginesListItem = (v) => {
 const getSearchList = async () => {
   if(!searchValue.value) return;
   const res = await fetch(
-    `https://wp-boke.work/api/getSearchList?keywork=${searchValue.value}`
+    `https://shimmer.wp-boke.work/api/getSearchList?keywork=${searchValue.value}`
   );
   const data: any = await res.json();
   associationalWordList.value = Array.isArray(data.data) ? data.data : [];
