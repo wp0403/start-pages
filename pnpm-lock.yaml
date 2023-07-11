@@ -11,6 +11,9 @@ dependencies:
   ant-design-vue:
     specifier: ^3.2.20
     version: registry.npmmirror.com/ant-design-vue@3.2.20(vue@3.2.47)
+  current-device:
+    specifier: ^0.10.2
+    version: registry.npmmirror.com/current-device@0.10.2
   unplugin-vue-components:
     specifier: ^0.25.1
     version: registry.npmmirror.com/unplugin-vue-components@0.25.1(vue@3.2.47)
@@ -776,6 +779,12 @@ packages:
     resolution: {integrity: sha512-Z1PhmomIfypOpoMjRQB70jfvy/wxT50qW08YXO5lMIJkrdq4yOTR+AW7FqutScmB9NkLwxo+jU+kZLbofZZq/w==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/csstype/-/csstype-2.6.21.tgz}
     name: csstype
     version: 2.6.21
+
+  registry.npmmirror.com/current-device@0.10.2:
+    resolution: {integrity: sha512-FN223n2Cp1fRI/gyjJEAdagHhJ/2Z2STz3tUg1t4F259BhmVRCChkmxcgFtjYJsWuIacQEs7bqJpnAczIXIkWw==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/current-device/-/current-device-0.10.2.tgz}
+    name: current-device
+    version: 0.10.2
+    dev: false
 
   registry.npmmirror.com/dayjs@1.11.8:
     resolution: {integrity: sha512-LcgxzFoWMEPO7ggRv1Y2N31hUf2R0Vj7fuy/m+Bg1K8rr+KAs1AEy4y9jd5DXe8pbHgX+srkHNS7TH6Q6ZhYeQ==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/dayjs/-/dayjs-1.11.8.tgz}

@@ -4,8 +4,10 @@
  * @Author: WangPeng
  * @Date: 2023-06-19 13:52:09
  * @LastEditors: WangPeng
- * @LastEditTime: 2023-07-06 17:07:53
+ * @LastEditTime: 2023-07-11 18:40:50
  */
+import device from 'current-device'
+
 export const getWeather = async () => {
   const key = '20561291894a3365e0a71cad618749e0';
   // 使用第三方IP地址查询API来获取当前IP地址
@@ -53,3 +55,16 @@ export const splitArray = (list, number) => {
   }, []);
   return result;
 }
+
+/**
+ * 判断设备
+ * @returns {isTablet | isPhone | isPc} {平板 | 手机 | 电脑}
+ */
+export const os = (function () {
+  return {
+    isTablet: device.ipad() || device.androidTablet() || device.mobile(), // 平板
+    isPhone: device.mobile(), // 手机
+    isPc: device.desktop() // 电脑
+  }
+})()
+

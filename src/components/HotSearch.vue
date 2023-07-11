@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2023-06-25 19:00:58
  * @LastEditors: WangPeng
- * @LastEditTime: 2023-07-05 16:08:24
+ * @LastEditTime: 2023-07-11 18:42:31
 -->
 <template>
   <div class="content">
@@ -17,7 +17,7 @@
         class="hot_item"
         v-for="item in hotList.slice(0, 20)"
         :key="item.hot"
-        :href="item.url"
+        :href="os.isPc ? item.url : item.mobileUrl"
         target="_blank"
       >
         <div class="hot_item_title">
@@ -29,7 +29,11 @@
         </div>
       </a>
     </div>
-    <Bookmark :class="{ hot_search_active: config.contentType === 2 || !config.isHotSearch }" />
+    <Bookmark
+      :class="{
+        hot_search_active: config.contentType === 2 || !config.isHotSearch,
+      }"
+    />
     <div class="btn_box">
       <div
         class="btn_item"
@@ -54,6 +58,7 @@ import SysIcon from "@/components/SysIcon.vue";
 import Bookmark from "@/components/Bookmark.vue";
 import { getHotSearchList } from "@/services/hotSearch";
 import configStore from "@/store/config";
+import { os } from "@/utils/utils";
 
 const { config, changeConfig } = configStore;
 
@@ -66,7 +71,7 @@ const getHotSearch = async () => {
   const current = config.hotSearchList.find(
     (v) => v.id === config.currentHotSearch
   );
-  if(!current?.url) return;
+  if (!current?.url) return;
   await getHotSearchList(current.url).then((res) => {
     loading.value = false;
     hotList.value = res;

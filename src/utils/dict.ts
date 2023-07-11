@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2023-06-25 17:48:09
  * @LastEditors: WangPeng
- * @LastEditTime: 2023-07-07 11:20:05
+ * @LastEditTime: 2023-07-11 18:37:17
  */
 export const searchList = [
     {
@@ -49,57 +49,67 @@ export const hotSearchList = [
     {
         id: 1,
         title: '百度',
-        url: 'https://api.vvhan.com/api/hotlist?type=baiduRD',
+        url: 'https://api.wp-boke.work/baidu',
     },
     {
         id: 2,
         title: '微博',
-        url: 'https://api.vvhan.com/api/hotlist?type=wbHot',
+        url: 'https://api.wp-boke.work/weibo',
     },
     {
         id: 3,
         title: '抖音',
-        url: 'https://api.vvhan.com/api/hotlist?type=douyinHot',
+        url: 'https://api.wp-boke.work/douyin2',
     },
     {
         id: 5,
         title: '36氪',
-        url: 'https://api.vvhan.com/api/hotlist?type=36Ke',
+        url: 'https://api.wp-boke.work/36kr',
     },
     {
         id: 6,
-        title: '虎扑',
-        url: 'https://api.vvhan.com/api/hotlist?type=huPu',
+        title: '头条',
+        url: 'https://api.wp-boke.work/toutiao',
     },
     {
         id: 7,
         title: '知乎',
-        url: 'https://api.vvhan.com/api/hotlist?type=zhihuHot',
+        url: 'https://api.wp-boke.work/zhihu',
     },
     {
         id: 8,
         title: 'bilibili',
-        url: 'https://api.vvhan.com/api/hotlist?type=bili',
+        url: 'https://api.wp-boke.work/bilibili',
     },
     {
         id: 9,
         title: '少数派',
-        url: 'https://api.vvhan.com/api/hotlist?type=ssPai',
+        url: 'https://api.wp-boke.work/sspai',
     },
     {
         id: 10,
-        title: '豆瓣小组',
-        url: 'https://api.vvhan.com/api/hotlist?type=douban',
+        title: '腾讯新闻',
+        url: 'https://api.wp-boke.work/newsqq',
     },
     {
         id: 11,
-        title: 'IT资讯最新',
-        url: 'https://api.vvhan.com/api/hotlist?type=itNews',
+        title: '澎湃新闻',
+        url: 'https://api.wp-boke.work/thepaper',
     },
     {
         id: 12,
-        title: 'IT资讯热榜',
-        url: 'https://api.vvhan.com/api/hotlist?type=itInfo',
+        title: '百度贴吧',
+        url: 'https://api.wp-boke.work/tieba',
+    },
+    {
+        id: 13,
+        title: '掘金',
+        url: 'https://api.wp-boke.work/juejin',
+    },
+    {
+        id: 14,
+        title: 'IT之家',
+        url: 'https://api.wp-boke.work/ithome',
     },
 ]
 
@@ -190,7 +200,7 @@ export const themeList = [
 ]
 
 export const initConfig = {
-    version: '1.0.4',
+    version: '1.0.5',
     // 是否清空搜索
     isClearSearch: false,
     // 是否保存历史记录 
