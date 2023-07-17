@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2023-06-25 17:48:09
  * @LastEditors: WangPeng
- * @LastEditTime: 2023-07-11 18:37:17
+ * @LastEditTime: 2023-07-14 11:53:07
  */
 export const searchList = [
     {
@@ -59,7 +59,7 @@ export const hotSearchList = [
     {
         id: 3,
         title: '抖音',
-        url: 'https://api.wp-boke.work/douyin2',
+        url: 'https://api.wp-boke.work/douyin_new',
     },
     {
         id: 5,
@@ -200,7 +200,7 @@ export const themeList = [
 ]
 
 export const initConfig = {
-    version: '1.0.5',
+    version: '1.0.6',
     // 是否清空搜索
     isClearSearch: false,
     // 是否保存历史记录 
