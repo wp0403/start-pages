@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2023-06-25 17:48:09
  * @LastEditors: WangPeng
- * @LastEditTime: 2023-08-18 17:42:06
+ * @LastEditTime: 2023-08-18 17:43:30
  */
 export const searchList = [
     {
@@ -115,6 +115,11 @@ export const hotSearchList = [
 
 export const bookmark = [
     {
+        id: 12,
+        title: 'shimmer起始页',
+        url: 'https://start.wp-boke.work/',
+    },
+    {
         id: 1,
         title: '掘金',
         url: 'https://juejin.cn/',
@@ -200,7 +205,7 @@ export const themeList = [
 ]
 
 export const initConfig = {
-    version: '1.0.7',
+    version: '1.0.8',
     // 是否清空搜索
     isClearSearch: false,
     // 是否保存历史记录 
