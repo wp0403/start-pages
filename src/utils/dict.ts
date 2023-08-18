@@ -4,7 +4,7 @@
  * @Author: WangPeng
  * @Date: 2023-06-25 17:48:09
  * @LastEditors: WangPeng
- * @LastEditTime: 2023-07-14 11:53:07
+ * @LastEditTime: 2023-08-18 17:42:06
  */
 export const searchList = [
     {
@@ -146,8 +146,8 @@ export const bookmark = [
     },
     {
         id: 8,
-        title: '韩小韩API接口站',
-        url: 'https://api.vvhan.com/',
+        title: 'API接口站',
+        url: 'https://api-render.wp-boke.work/',
     },
 ];
 
@@ -200,7 +200,7 @@ export const themeList = [
 ]
 
 export const initConfig = {
-    version: '1.0.6',
+    version: '1.0.7',
     // 是否清空搜索
     isClearSearch: false,
     // 是否保存历史记录 
