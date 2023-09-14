@@ -4,24 +4,9 @@
  * @Author: WangPeng
  * @Date: 2023-06-19 13:52:09
  * @LastEditors: WangPeng
- * @LastEditTime: 2023-07-11 18:40:50
+ * @LastEditTime: 2023-09-14 15:40:23
  */
 import device from 'current-device'
-
-export const getWeather = async () => {
-  const key = '20561291894a3365e0a71cad618749e0';
-  // 使用第三方IP地址查询API来获取当前IP地址
-  await fetch(`https://restapi.amap.com/v3/ip?key=${key}`)
-    .then(response => response.json())
-    .then(async data => {
-      await fetch(`https://restapi.amap.com/v3/weather/weatherInfo?key=${key}&city=${data.adcode}&extensions=base`)
-        .then(response => response.json())
-        .then(res => {
-          return res;
-        })
-    })
-    .catch(error => console.error(error));
-}
 
 /**
  * 主题切换
